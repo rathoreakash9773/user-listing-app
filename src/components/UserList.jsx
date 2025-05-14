@@ -36,7 +36,6 @@ const UserList = () => {
         }
 
         const fetchedUsers = Array.isArray(fetchedData.users.data) ? fetchedData.users.data : [];
-        console.log('Fetched Users:', fetchedUsers);
 
         const usersPerPage = 8;
         const calculatedTotalPages = Math.ceil(fetchedUsers.length / usersPerPage);
@@ -58,12 +57,18 @@ const UserList = () => {
   const handleDelete = async (userId) => {
     try {
       await deleteUser(userId);
-      setUsers(users.filter(user => user.id !== userId));
+      const updatedUsers = users.filter(user => user.id !== userId);
+  
+      if (updatedUsers.length === 0 && currentPage > 1) {
+        setCurrentPage(currentPage - 1); 
+      } else {
+        setUsers(updatedUsers); 
+      }
     } catch (error) {
       console.error("Delete failed:", error);
     }
   };
-
+  
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };

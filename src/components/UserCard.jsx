@@ -8,11 +8,10 @@ const Card = styled.div`
   padding: 12px;
   text-align: center;
   height: 330px;
-  width: 248px;
+  width: 265px;
   position: relative;
   overflow: hidden; 
   display: flex;
-  margin-left: 1%;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -25,11 +24,12 @@ const Card = styled.div`
 `;
 
 const Name = styled.h3`
-  font-family: 'Outfit', sans-serif;
+  font-family: 'outfit', sans-serif;
   font-size: 18px;
   color: #333;
   font-weight: bold;
-  margin-bottom: 0px; 
+  margin-bottom: -4px; 
+  margin-top: 6px;
   position: relative;
 `;
 
@@ -37,7 +37,7 @@ const Email = styled.p`
   margin: 0 0 15px;
   margin-bottom: 8px;
   font-weight: light;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'outfit', sans-serif;
   font-size: 16px;
   color:rgb(86, 86, 88);
   position: relative;
