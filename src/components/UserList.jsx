@@ -53,22 +53,39 @@ const UserList = () => {
 
     loadUsers();
   }, [currentPage]);
+  
 
   const handleDelete = async (userId) => {
     try {
       await deleteUser(userId);
-      const updatedUsers = users.filter(user => user.id !== userId);
+      const fetchedData = await fetchUsers(currentPage);
   
-      if (updatedUsers.length === 0 && currentPage > 1) {
-        setCurrentPage(currentPage - 1); 
-      } else {
-        setUsers(updatedUsers); 
+      if (!fetchedData || !fetchedData.users || !fetchedData.users.data) {
+        console.error('Invalid response structure:', fetchedData);
+        return;
+      }
+  
+      const fetchedUsers = Array.isArray(fetchedData.users.data) ? fetchedData.users.data : [];
+      const usersPerPage = 8;
+      const startIndex = (currentPage - 1) * usersPerPage;
+      const endIndex = startIndex + usersPerPage;
+      const currentPageUsers = fetchedUsers.slice(startIndex, endIndex);
+  
+      setUsers(currentPageUsers);
+  
+      // Update total pages in case the number of users has changed
+      const calculatedTotalPages = Math.ceil(fetchedUsers.length / usersPerPage);
+      setTotalPages(calculatedTotalPages);
+  
+      // Adjust the page if the current page becomes empty
+      if (currentPageUsers.length === 0 && currentPage > 1) {
+        setCurrentPage(currentPage - 1);
       }
     } catch (error) {
       console.error("Delete failed:", error);
     }
   };
-  
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
