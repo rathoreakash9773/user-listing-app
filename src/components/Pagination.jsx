@@ -19,13 +19,12 @@ const PageButton = styled.button`
   cursor: pointer;
   outline: none;
   transition: background 0.2s;
-
   &:hover { background-color: ${({ $active }) => ($active ? '#5b21b6' : '#f0f0f0')};}
   &:disabled { opacity: 0.4; cursor: not-allowed; }
 `;
 
 // handle current page and total pages
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ currentPage, totalPages, onPageChange, isNextPageEmpty }) => {
     const handlePrevious = () => {
         if (currentPage > 1) onPageChange(currentPage - 1);
     };
@@ -52,9 +51,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         <PaginationContainer>
             <PageButton onClick={handlePrevious} disabled={currentPage === 1}> &#8249; </PageButton>
             {pages}
-            <PageButton onClick={handleNext}>  &#8250; </PageButton>
+            <PageButton 
+                onClick={handleNext} disabled={currentPage === totalPages || (currentPage === 1 && isNextPageEmpty)} > &#8250;</PageButton>
         </PaginationContainer>
     );
 };
-
 export default Pagination;

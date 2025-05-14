@@ -1,10 +1,9 @@
 import axios from 'axios';
-
-const API_URL = 'http://localhost:3001/api/users';
+import { api_url } from '../utils/constant';
 
 export const addUser = async (userData) => {
     try {
-        const response = await axios.post(API_URL, userData);
+        const response = await axios.post(api_url, userData);
         return response.data;
     } catch (error) {
         console.error('Error adding user:', error);
@@ -14,7 +13,7 @@ export const addUser = async (userData) => {
 
 export const fetchUsers = async (page = 1, limit= 10) => {
     try {
-        const response = await axios.get(`${API_URL}?page=${page}&limit=${limit}`);
+        const response = await axios.get(`${api_url}?page=${page}&limit=${limit}`);
         return {
             users: response.data.users || response.data,
             totalPages: response.data.totalPages || 1
@@ -28,8 +27,8 @@ export const fetchUsers = async (page = 1, limit= 10) => {
 export const deleteUser = async (userId) => {
     console.log('Deleting user with ID:', userId);
     try {
-        await axios.delete(`${API_URL}/${userId}`);
-        console.log(`DELETE request sent to: ${API_URL}/${userId}`);
+        await axios.delete(`${api_url}/${userId}`);
+        console.log(`DELETE request sent to: ${api_url}/${userId}`);
         return true;
     } catch (error) {
         console.error('Error deleting user:', error);

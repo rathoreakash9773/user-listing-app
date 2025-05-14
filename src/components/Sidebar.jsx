@@ -14,7 +14,7 @@ const SidebarWrapper = styled.aside`
   margin-top: -18px;
   background-color: #ffffff;
   padding-top: 2rem;
-  padding-left: 1rem;
+  padding-left: -1rem;
   border-right: 1px solid #e0e0e0;
   box-shadow: 0 8px 4px rgba(0, 0, 0, 0.1);
 `;
@@ -45,11 +45,11 @@ const Icon = styled.img`
 const Sidebar = () => (
   <SidebarWrapper>
     <SidebarItem $active>
-      <Icon src="./svg&images/group.svg" alt="Team Icon" />
+      <Icon src="./icons/group.svg" alt="Team Icon" />
       <span>All Team Member</span>
     </SidebarItem>
     <SidebarItem>
-      <Icon src="./svg&images/person_add.svg" alt="Create Icon" />
+      <Icon src="./icons/person_add.svg" alt="Create Icon" />
       <span>Create Profile</span>
     </SidebarItem>
   </SidebarWrapper>

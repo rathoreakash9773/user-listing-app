@@ -80,7 +80,7 @@ const CloseButton = styled.button`
 const UserCard = ({ user, onDelete }) => {
   return (
     <Card>
-      <CloseButton onClick={() => onDelete(user.id)}>&times;</CloseButton>
+      <CloseButton onClick={() => onDelete(user?.id)}>&times;</CloseButton>
       <Avatar src={user.image} alt={user.name} />
       <Name>{user.name}</Name>
       <Email>{user.email}</Email>

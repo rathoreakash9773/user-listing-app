@@ -1,4 +1,3 @@
-// components/PageHeader.jsx
 import React from "react";
 import styled from "styled-components";
 
@@ -19,7 +18,10 @@ const TopHeader = styled.header`
 `;
 
 const LogoImg = styled.img`
-  height: 60px;
+  height: 24px;
+  width: 71.27px;
+  margin-top: 10px;
+  margin-left: 0px;
 `;
 
 const ProfileSection = styled.div`
@@ -49,12 +51,12 @@ const Arrow = styled.img`
 const PageHeader = () => (
   <TopHeader>
     <div>
-      <LogoImg src="./svg&images/uolo-logo.jpeg" alt="Uolo Logo" />
+      <LogoImg src="./icons/Vector.svg" alt="Uolo Logo" />
     </div>
     <ProfileSection>
-      <ProfileImg src="./svg&images/Mask_Group.svg" alt="User" />
+      <ProfileImg src="./icons/Mask_Group.svg" alt="User" />
       <ProfileName>Akash</ProfileName>
-      <Arrow src="./svg&images/chevron-down.svg" alt="mask" />
+      <Arrow src="./icons/chevron-down.svg" alt="mask" />
     </ProfileSection>
   </TopHeader>
 );

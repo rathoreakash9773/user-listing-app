@@ -20,7 +20,6 @@ const UserListGrid = styled.div`
   align-items: start; 
 `;
 
-
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,22 +28,30 @@ const UserList = () => {
   useEffect(() => {
     const loadUsers = async () => {
       try {
-        const { users: fetchedUsers } = await fetchUsers(1);
+        const fetchedData = await fetchUsers(1);
+
+        if (!fetchedData || !fetchedData.users || !fetchedData.users.data) {
+          console.error('Invalid response structure:', fetchedData);
+          return;
+        }
+
+        const fetchedUsers = Array.isArray(fetchedData.users.data) ? fetchedData.users.data : [];
+        console.log('Fetched Users:', fetchedUsers);
+
         const usersPerPage = 8;
-  
         const calculatedTotalPages = Math.ceil(fetchedUsers.length / usersPerPage);
         setTotalPages(calculatedTotalPages);
-  
+
         const startIndex = (currentPage - 1) * usersPerPage;
         const endIndex = startIndex + usersPerPage;
         const currentPageUsers = fetchedUsers.slice(startIndex, endIndex);
-  
+
         setUsers(currentPageUsers);
       } catch (error) {
-        console.error("Failed to load users:", error);
+        console.error('Failed to load users:', error);
       }
     };
-  
+
     loadUsers();
   }, [currentPage]);
 
