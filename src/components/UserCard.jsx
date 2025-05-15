@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Card = styled.div`
   background: #fff;
   border-radius: 20px;
-  padding: 12px;
+  padding: 14px;
   text-align: center;
   height: 330px;
   position: relative;
@@ -17,8 +17,8 @@ const Card = styled.div`
   background-color: rgba(196, 195, 195, 0.22);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
-  margin-bottom: -0px;
-  margin-top: -5px;
+  margin-bottom: 5px;
+  margin-top: -1px;
   margin-right: 10px;
 `;
 

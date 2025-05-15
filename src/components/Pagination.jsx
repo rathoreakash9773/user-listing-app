@@ -40,16 +40,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange, isNextPageEmpty }) 
     const pages = [];
     for (let i = startPage; i <= endPage; i++) {
         pages.push(
-            <PageButton
-                key={i}
-                $active={i === currentPage}
-                onClick={() => onPageChange(i)}
-            >
-                {i}
-            </PageButton>
-        );
+            <PageButton key={i} $active={i === currentPage} onClick={() => onPageChange(i)} > {i} </PageButton>  );
     }
-
+    
     return (
         <PaginationContainer>
             <PageButton onClick={handlePrevious} disabled={currentPage === 1}> &#8249; </PageButton>
