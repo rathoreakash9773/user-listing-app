@@ -5,16 +5,19 @@ import Pagination from './Pagination';
 import PageHeader from './PageHeader';
 import Sidebar from './Sidebar';
 import MainContent from './MainContent'; 
-import { fetchUsers, deleteUser } from '../services/api';
+import { fetchUsers, deleteUser } from '../services/server';
 
 const LayoutWrapper = styled.div`
   display: flex;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 250px 1fr; 
+  height: 100vh; 
 `;
 
 const UserListGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-  gap: 19px; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 10px; 
   padding: 18px;
   justify-content: center; 
   align-items: start; 
@@ -73,11 +76,9 @@ const UserList = () => {
   
       setUsers(currentPageUsers);
   
-      // Update total pages in case the number of users has changed
       const calculatedTotalPages = Math.ceil(fetchedUsers.length / usersPerPage);
       setTotalPages(calculatedTotalPages);
   
-      // Adjust the page if the current page becomes empty
       if (currentPageUsers.length === 0 && currentPage > 1) {
         setCurrentPage(currentPage - 1);
       }

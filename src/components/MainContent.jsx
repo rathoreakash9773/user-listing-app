@@ -35,8 +35,8 @@ const Wrapper = styled.main`
   margin-left: 220px;  
   margin-top: 60px;    
   width: calc(100vw - 80px); 
-  min-height: calc(100vh - 80px); 
-  height: 923px;
+  min-height: calc(100vh - 60px); 
+  template-columns: repeat(auto-fit, minmax(250px, 1fr));
   padding: 32px;
   background-color: #ffffff;
   overflow: auto;
