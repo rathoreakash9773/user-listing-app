@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const PaginationContainer = styled.div`
+const PaginationContainer = styled.ul`
   display: flex;
   justify-content: center;
   gap: 8px;
@@ -25,16 +25,20 @@ const PageButton = styled.button`
 `;
 
 const Pagination = ({ currentPage, totalPages, onPageChange, isNextPageEmpty }) => {
+    const maxVisiblePages = 3;
+    const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages /2));
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
     const handlePrevious = () => {
         if (currentPage > 1) onPageChange(currentPage - 1);
-    };
+    }
 
     const handleNext = () => {
         if (currentPage < totalPages) onPageChange(currentPage + 1);
-    };
+    }
 
     const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = startPage; i <= endPage; i++) {
         pages.push(
             <PageButton
                 key={i}
@@ -56,3 +60,5 @@ const Pagination = ({ currentPage, totalPages, onPageChange, isNextPageEmpty }) 
     );
 };
 export default Pagination;
+
+

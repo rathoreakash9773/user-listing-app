@@ -9,14 +9,12 @@ import { fetchUsers, deleteUser } from '../services/server';
 
 const LayoutWrapper = styled.div`
   display: flex;
-  grid-template-rows: auto 1fr;
-  grid-template-columns: 250px 1fr; 
-  height: 100vh; 
 `;
 
 const UserListGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
+  grid-template-rows: repeat(2, 1fr);
   gap: 10px; 
   padding: 18px;
   justify-content: center; 
