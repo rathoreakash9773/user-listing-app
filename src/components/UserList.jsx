@@ -29,61 +29,43 @@ const UserList = () => {
   useEffect(() => {
     const loadUsers = async () => {
       try {
-        const fetchedData = await fetchUsers(1);
-
-        if (!fetchedData || !fetchedData.users || !fetchedData.users.data) {
+        const fetchedData = await fetchUsers(currentPage, 8);
+  
+        if (!fetchedData || !Array.isArray(fetchedData.users)) {
           console.error('Invalid response structure:', fetchedData);
           return;
         }
-
-        const fetchedUsers = Array.isArray(fetchedData.users.data) ? fetchedData.users.data : [];
-
-        const usersPerPage = 8;
-        const calculatedTotalPages = Math.ceil(fetchedUsers.length / usersPerPage);
-        setTotalPages(calculatedTotalPages);
-
-        const startIndex = (currentPage - 1) * usersPerPage;
-        const endIndex = startIndex + usersPerPage;
-        const currentPageUsers = fetchedUsers.slice(startIndex, endIndex);
-
-        setUsers(currentPageUsers);
+  
+        setUsers(fetchedData.users);
+        setTotalPages(fetchedData.totalPages || 1);
       } catch (error) {
         console.error('Failed to load users:', error);
       }
     };
-
+  
     loadUsers();
   }, [currentPage]);
   
-
   const handleDelete = async (userId) => {
     try {
       await deleteUser(userId);
-      const fetchedData = await fetchUsers(currentPage);
+      const fetchedData = await fetchUsers(currentPage, 8);
   
-      if (!fetchedData || !fetchedData.users || !fetchedData.users.data) {
+      if (!fetchedData || !Array.isArray(fetchedData.users)) {
         console.error('Invalid response structure:', fetchedData);
         return;
       }
   
-      const fetchedUsers = Array.isArray(fetchedData.users.data) ? fetchedData.users.data : [];
-      const usersPerPage = 8;
-      const startIndex = (currentPage - 1) * usersPerPage;
-      const endIndex = startIndex + usersPerPage;
-      const currentPageUsers = fetchedUsers.slice(startIndex, endIndex);
-  
-      setUsers(currentPageUsers);
-  
-      const calculatedTotalPages = Math.ceil(fetchedUsers.length / usersPerPage);
-      setTotalPages(calculatedTotalPages);
-  
-      if (currentPageUsers.length === 0 && currentPage > 1) {
-        setCurrentPage(currentPage - 1);
+      if (fetchedData.users.length === 0 && currentPage > 1) {
+        setCurrentPage(currentPage - 1); 
+      } else {
+        setUsers(fetchedData.users);
+        setTotalPages(fetchedData.totalPages || 1);
       }
     } catch (error) {
-      console.error("Delete failed:", error);
+      console.error('Delete failed:', error);
     }
-  };
+  };  
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
