@@ -6,12 +6,13 @@ import PageHeader from './PageHeader';
 import Sidebar from './Sidebar';
 import MainContent from './MainContent'; 
 import { fetchUsers, deleteUser } from '../services/server';
+import CreateProfile from './createProfile';
 
 const LayoutWrapper = styled.div`
   display: flex;
 `;
 
-const UserListGrid = styled.div`
+const UserListGrid = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
   grid-template-rows: repeat(2, 1fr);
@@ -82,7 +83,7 @@ const UserList = () => {
             <UserCard key={user.id || index} user={user} onDelete={handleDelete} />))}
         </UserListGrid>
           <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}
-          />
+/>
         </MainContent>
       </LayoutWrapper>
     </>

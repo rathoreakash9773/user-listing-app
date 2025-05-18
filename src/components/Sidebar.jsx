@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const SidebarWrapper = styled.aside`
   width: 230px;
@@ -43,14 +44,18 @@ const Icon = styled.img`
 
 const Sidebar = () => (
   <SidebarWrapper>
-    <SidebarItem $active>
-      <Icon src="./icons/group.svg" alt="Team Icon" />
-      <span>All Team Member</span>
-    </SidebarItem>
-    <SidebarItem>
-      <Icon src="./icons/person_add.svg" alt="Create Icon" />
-      <span>Create Profile</span>
-    </SidebarItem>
+    <Link to="/">
+      <SidebarItem $active>
+        <Icon src="./icons/group.svg" alt="Team Icon" />
+        <span>All Team Member</span>
+      </SidebarItem>
+    </Link>
+    <Link to="/create-profile">
+      <SidebarItem>
+        <Icon src="./icons/person_add.svg" alt="Create Icon" />
+        <span>Create Profile</span>
+      </SidebarItem>
+    </Link>
   </SidebarWrapper>
 );
 
